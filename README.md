@@ -79,7 +79,7 @@ $ LD_LIBRARY_PATH=z3/lib/ tagomori-1.0-SNAPSHOT/bin/tagomori -ropsten -guardian 
 
 * CALLによる不正送金
     * Reentrancyにも対応
-* CALLCODE、DELEGATECALLによる任意のコード実行
+* CALLCODE、DELEGATECALLによる、任意のコード実行を経由した不正送金
 * SELFDESTRUCTによる不正送金
 * ERC20コインの不正送金
 
