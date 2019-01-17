@@ -74,10 +74,19 @@ $ LD_LIBRARY_PATH=z3/lib/ tagomori-1.0-SNAPSHOT/bin/tagomori -ropsten -guardian 
 
 脆弱性が存在する場合、resultディレクトリにjson形式でエクスプロイトが作成されます。
 
+対応している脆弱性
+---
+
+* CALLによる不正送金
+    * Reentrancyにも対応
+* CALLCODE、DELEGATECALLによる任意のコード実行
+* SELFDESTRUCTによる不正送金
+* ERC20コインの不正送金
+
 注意事項
 ---
 
-* 自動生成されるエクスプロイトは、アドレス73E83E2Ab2ca3967db126F9534808C92320cbb90が攻撃者であると仮定して作成されます。
+* 自動生成されるエクスプロイトは、「攻撃者のアドレスは73E83E2Ab2ca3967db126F9534808C92320cbb90であり、残高が1ETH以上である」と仮定して作成されます。
 * [z3](https://github.com/Z3Prover/z3)ライブラリの動作が不安定であるためjavaプロセスが異常終了する場合があります。その場合は、再度コマンドを実行してください。
 
 LICENSE
