@@ -78,7 +78,7 @@ $ LD_LIBRARY_PATH=z3/lib/ tagomori-1.0-SNAPSHOT/bin/tagomori -ropsten -guardian 
 ---
 
 * 自動生成されるエクスプロイトは、アドレス73E83E2Ab2ca3967db126F9534808C92320cbb90が攻撃者であると仮定して作成されます。
-* z3(https://github.com/Z3Prover/z3)の動作が不安定であるためjavaプロセスが異常終了する場合があります。その場合は、再度コマンドを実行してください。
+* [z3](https://github.com/Z3Prover/z3)ライブラリの動作が不安定であるためjavaプロセスが異常終了する場合があります。その場合は、再度コマンドを実行してください。
 
 LICENSE
 -----
