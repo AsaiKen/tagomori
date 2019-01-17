@@ -1,0 +1,44 @@
+plugins {
+    id 'io.franzbecker.gradle-lombok' version '1.14'
+    id 'java'
+}
+
+group 'tagomori'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    maven { url "https://dl.bintray.com/ethereum/maven/" }
+}
+
+lombok {
+    version = '1.18.4'
+    sha256 = ""
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    compile group: 'org.ethereum', name: 'ethereumj-core', version: '1.10.0-RELEASE'
+
+    compile files("z3/com.microsoft.z3.jar")
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
+
+    compile "com.google.guava:guava:24.1-jre"
+    compile "org.slf4j:slf4j-api:1.7.7"
+    compile "ch.qos.logback:logback-classic:1.1.7"
+    compile "org.apache.commons:commons-lang3:3.4"
+    compile "com.fasterxml.jackson.core:jackson-databind:2.5.1"
+    compile "org.ethereum:rocksdbjni:5.9.2"
+}
+
+apply plugin: 'application'
+mainClassName = 'net.katagaitai.tagomori.Start'
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'net.katagaitai.tagomori.Start '
+    }
+}

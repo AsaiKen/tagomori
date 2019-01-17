@@ -1,0 +1,19 @@
+push 10
+push 0
+push 0x0
+MSTORE
+
+label:
+JUMPDEST
+DUP1
+push 0x0
+MLOAD
+ADD
+push 0x0
+MSTORE
+
+push 1
+SWAP1
+SUB
+DUP1
+jumpi @label
