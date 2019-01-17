@@ -5,6 +5,7 @@ tagomoriはEthereumスマートコントラクトの脆弱性検出ツールで�
 以下の特徴があります。
 
 * ソースコードがなくても、スマートコントラクトのアドレスを知っていれば検査可能
+* ETHの不正送金だけでなく、ERC20トークンの不正送金の脆弱性にも対応
 * 複数のトランザクションを経由する脆弱性に対応
 * 複数のスマートコントラクトを経由する脆弱性に対応
 * リアルタイムのブロックチェーン上のデータを参照可能
@@ -81,7 +82,7 @@ $ LD_LIBRARY_PATH=z3/lib/ tagomori-1.0-SNAPSHOT/bin/tagomori -ropsten -guardian 
     * Reentrancyにも対応
 * CALLCODE、DELEGATECALLによる、任意のコード実行を経由した不正送金
 * SELFDESTRUCTによる不正送金
-* ERC20コインの不正送金
+* ERC20トークンの不正送金
 
 注意事項
 ---
