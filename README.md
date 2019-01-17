@@ -1,6 +1,6 @@
 # tagomori
 
-tagomoriはEthereumスマートコントラクトの脆弱性検出ツールです。
+tagomoriは、Ethereumスマートコントラクトの脆弱性を検出する、静的解析ツールです。
 
 以下の特徴があります。
 
