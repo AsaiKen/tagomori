@@ -63,7 +63,7 @@ $ LD_LIBRARY_PATH=z3/lib/ tagomori-1.0-SNAPSHOT/bin/tagomori -ropsten -address A
 また、例えば、
 
 * Ropstenネットワークの
-* すべての更新されたコントラクトを
+* すべての更新されたコントラクトを継続して
 * ブロックチェーンのデータベースをdatabaseディレクトリに保存して
 
 検査する場合は以下のコマンドを実行してください。
