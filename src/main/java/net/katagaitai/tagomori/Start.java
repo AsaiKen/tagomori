@@ -127,13 +127,13 @@ public class Start {
     }
 
     static void printHelp() {
-        System.out.println("--help                -- このメッセージを表示します。");
-        System.out.println("-ropsten              -- ropstenネットワークを想定して検査します。");
-        System.out.println("-mainnet              -- mainnetネットワークを想定して検査します。");
-        System.out.println("-sync                 -- ネットワークと同期した後に検査します。初めての場合、同期するまでに約1日がかかります。");
-        System.out.println("-database <path>      -- ブロックチェーンのデータベースディレクトリのパスを指定します。存在しない場合、作成します。");
-        System.out.println("-address <address>    -- このアドレスを検査します。 <address>には16進数文字列を指定してください。");
-        System.out.println("-guardian             -- リアルタイムのブロックチェーンを監視して、更新されたコントラクトをすべて検査します。");
+        System.out.println("--help                -- print this message");
+        System.out.println("-sync                 -- if specified, start a scan after synchronize with Ethereum network. if first time, it takes about a day to finish synchronization.");
+        System.out.println("-ropsten              -- if specified, scan for Ropsten network.");
+        System.out.println("-mainnet              -- if specified, scan for Mainnet network.");
+        System.out.println("-database <path>      -- specify the path of directory of EthereumJ blockchain database. if the directory does not exist, creates the directory.");
+        System.out.println("-address <address>    -- specify the target contract address. <address> must be a hexadecimal string.");
+        System.out.println("-guardian             -- if specified, keep synchronizing and scanning all the updated contracts in Ethereum network.");
         System.out.println("e.g: cli -ropsten -sync -database database -address A53514927D1a6a71f8075Ba3d04eb7379B04C588");
         System.out.println();
     }

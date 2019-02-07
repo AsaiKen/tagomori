@@ -1,97 +1,101 @@
 # tagomori
 
-tagomoriはEthereumスマートコントラクトのセキュリティ解析ツールです。
+Tagomori is a security analysis tool for Ethereum smart-contracts.
 
-以下の特徴があります。
+Tagomori has following features.
 
-* ソースコードがなくても、スマートコントラクトのアドレスを知っていれば検査可能
-* ETHの不正送金だけでなく、ERC20トークンの不正送金の脆弱性にも対応
-* 複数のトランザクションを経由する脆弱性に対応
-* 複数のスマートコントラクトを経由する脆弱性に対応
-* リアルタイムのブロックチェーン上のデータを参照可能
-* 検出した脆弱性をリアルタイムのブロックチェーン上でシミュレーションして誤検知を回避
-* 脆弱性を検証するためのエクスプロイトを自動生成
-* シンボリック実行技術を使用して誤検知を回避
-* マルチコアを活用して高速に検査を実施
+* not need the source-code, only need the address of the contract.
+* detect unintended transfer of not only ETH but also ERC20 tokens.
+* detect vulnerabilities that fired via multiple transactions.
+* detect vulnerabilities that fired via multiple contracts.
+* refer data of real-time blockchain.
+* avoid false-positive by simulating detected vulnerabilities on real-time blockchain.
+* generate exploits automatically to proof vulnerabilities.
+* avoid false-positive by using "symbolic execution" technology.
+* utilize multi-cores to speed up scans.
 
-動作環境
+Environments
 -----
 
 * Ubuntu 18.04 LTS
-* openjdk 1.8系
+* openjdk 1.8
 
-ビルド
+Build
 -----
 
-以下のコマンドを実行してください。
+Run the following command.
 
 ```
 $ sh build.sh
 ```
 
-tagomori-1.0-SNAPSHOTディレクトリに実行ファイル群が作成されます。
+This generates executable files in the "./tagomori-1.0-SNAPSHOT" diractory.
 
-実行
+Execute
 -----
 
-tagomoriはコマンドラインツールです。以下のコマンドラインオプションがあります。
+Tagomori is a command-line tool, which has following command-line options.
 
 ```
---help                -- このメッセージを表示します。
--sync                 -- ネットワークと同期した後に検査します。初めての場合、同期するまでに約1日がかかります。
--ropsten              -- ropstenネットワークを想定して検査します。
--mainnet              -- mainnetネットワークを想定して検査します。
--database <path>      -- ブロックチェーンのデータベースディレクトリのパスを指定します。存在しない場合、作成します。
--address <address>    -- このアドレスを検査します。 <address>には16進数文字列を指定してください。
--guardian             -- ネットワークと同期した後に、ネットワークとの同期と更新されたすべてのコントラクトへの検査を実行し続けます。
+--help                -- print this message
+-sync                 -- if specified, start a scan after synchronize with Ethereum network. if first time, it takes about a day to finish synchronization.
+-ropsten              -- if specified, scan for Ropsten network.
+-mainnet              -- if specified, scan for Mainnet network.
+-database <path>      -- specify the path of directory of EthereumJ blockchain database. if the directory does not exist, creates the directory.
+-address <address>    -- specify the target contract address. <address> must be a hexadecimal string.
+-guardian             -- if specified, keep synchronizing and scanning all the updated contracts in Ethereum network.
 ```
 
-※オープンソース版では悪用を防ぐために-mainnetの機能を無効化しています。
+NOTICE: In open-source edition, "-mainnet" option is disabled to prevent misuses.
 
-例えば、
+Examples
+---
 
-* Ropstenネットワークの
-* アドレスA53514927D1a6a71f8075Ba3d04eb7379B04C588のコントラクトを
-* リアルタイムのブロックチェーンを参照して
-* databaseディレクトリにあるブロックチェーンのデータベースを参照して
+If you want to scan in the following conditions,
 
-検査する場合は、以下のコマンドを実行してください。
+* scan for Ropsten network
+* target contract address is A53514927D1a6a71f8075Ba3d04eb7379B04C588
+* refer real-time blockchain
+* use the "./database" directory for blockchain database
+
+run the following command.
 
 ```
 $ LD_LIBRARY_PATH=z3/lib/ tagomori-1.0-SNAPSHOT/bin/tagomori -ropsten -address A53514927D1a6a71f8075Ba3d04eb7379B04C588 -sync -database database
 ```
 
-また、例えば、
+If you scan in the following conditions,
 
-* Ropstenネットワークの
-* すべての更新されたコントラクトを継続して
-* databaseディレクトリにあるブロックチェーンのデータベースを参照して
+* scan for Ropsten network
+* keep scanning all the updated contracts
+* use the "./database" directory for blockchain database
 
-検査する場合は以下のコマンドを実行してください。
+run the following command.
 
 ```
 $ LD_LIBRARY_PATH=z3/lib/ tagomori-1.0-SNAPSHOT/bin/tagomori -ropsten -guardian -database database
 ```
 
-脆弱性が存在する場合、resultディレクトリにjson形式でエクスプロイトが作成されます。
+If vulnerabilities exist, tagomori generates exploits in the JSON format in the "./result" directory.
 
-対応している脆弱性
+Supported Vulnerabilities
 ---
 
-* CALLによる不正送金
-    * Reentrancyにも対応
-* CALLCODE、DELEGATECALLによる、任意のコード実行を経由した不正送金
-* SELFDESTRUCTによる不正送金
-* ERC20トークンの不正送金
+* unintended transfer of ETH by CALL instruction
+    * includes "Reentrancy"
+* unintended transfer of ETH via arbitrary code execution by both instructions of CALLCODE and DELEGATECALL
+* unintended transfer of ETH by SELFDESTRUCT instruction
+* unintended transfer of ERC20 token
 
-なお、CALL、CALLCODE、DELEGATECALL、SELFDESTRUCTによる不正送金の脆弱性については、実際に不正送金できるか否かで脆弱性の有無を判断しているため、残高が0のコントラクトに対しては脆弱性を検知しません。検査対象のコントラクトには1ETH以上の残高をセットしておくことを推奨します。
+NOTICE: Tagomori checks whether the balance of the attacker account can increase or not in simulation phase, and then concludes whether a vulnerability exists or not. So if the balance of the target contract is 0, tagomori does not detect any vulnerabilities. I recommend to set more than 1 ETH to the target contract.
 
-その他
+Others
 ---
 
-* 自動生成されるエクスプロイトは、「攻撃者は、アドレス73E83E2Ab2ca3967db126F9534808C92320cbb90であり、残高が1ETH以上である」と仮定して作成されます。現時点では、このアドレスはハードコーディングされているため、このアドレスに異常が発生するとtagomoriが動作しない可能性があります。
-* [z3](https://github.com/Z3Prover/z3)ライブラリの動作が不安定であるためjavaプロセスが異常終了する場合があります。その場合は、再度コマンドを実行してください。
-* -guardianオプションは残高が1ETH以上のコントラクトを対象に検査を行います。
+* At this time, tagomori generates Japanese text logs in most cases. Sorry.
+* Auto-getnerated exploits assumes that the attacker account address is 73E83E2Ab2ca3967db126F9534808C92320cbb90 and the balance of this account is more than 1 ETH. At this time, this attacker address is hard-coded. So if this account has been modified abnormally, tagomori can not work well.
+* Java binding of [z3](https://github.com/Z3Prover/z3) library is unstable and sometimes halt abnormally. In such case, run the same command again.
+* When "-guardian" specified, tagomori only scan the contracts which balance is more than 1 ETH.
 
 LICENSE
 -----
