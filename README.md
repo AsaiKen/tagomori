@@ -95,7 +95,7 @@ Others
 * At this time, tagomori generates Japanese text logs in most cases. Sorry.
 * Auto-getnerated exploits assumes that the attacker account address is 73E83E2Ab2ca3967db126F9534808C92320cbb90 and the balance of this account is more than 1 ETH. At this time, this attacker address is hard-coded. So if this account has been modified abnormally, tagomori can not work well.
 * Java binding of [z3](https://github.com/Z3Prover/z3) library is unstable and sometimes halt abnormally. In such case, run the same command again.
-* When "-guardian" specified, tagomori only scan the contracts which balance is more than 1 ETH.
+* When "-guardian" specified, tagomori only scan contracts which balance is more than 1 ETH.
 
 LICENSE
 -----
