@@ -131,7 +131,7 @@ public class Start {
         System.out.println("-sync                 -- if specified, start a scan after synchronize with Ethereum network. if first time, it takes about a day to finish synchronization.");
         System.out.println("-ropsten              -- if specified, scan for Ropsten network.");
         System.out.println("-mainnet              -- if specified, scan for Mainnet network.");
-        System.out.println("-database <path>      -- specify the path of directory of EthereumJ blockchain database. if the directory does not exist, creates the directory.");
+        System.out.println("-database <path>      -- specify the path of the blockchain database directory. if the directory does not exist, creates the directory.");
         System.out.println("-address <address>    -- specify the target contract address. <address> must be a hexadecimal string.");
         System.out.println("-guardian             -- if specified, keep synchronizing and scanning all the updated contracts in Ethereum network.");
         System.out.println("e.g: cli -ropsten -sync -database database -address A53514927D1a6a71f8075Ba3d04eb7379B04C588");

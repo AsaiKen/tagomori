@@ -41,7 +41,7 @@ Tagomori is a command-line tool, which has following command-line options.
 -sync                 -- if specified, start a scan after synchronize with Ethereum network. if first time, it takes about a day to finish synchronization.
 -ropsten              -- if specified, scan for Ropsten network.
 -mainnet              -- if specified, scan for Mainnet network.
--database <path>      -- specify the path of directory of EthereumJ blockchain database. if the directory does not exist, creates the directory.
+-database <path>      -- specify the path of the blockchain database directory. if the directory does not exist, creates the directory.
 -address <address>    -- specify the target contract address. <address> must be a hexadecimal string.
 -guardian             -- if specified, keep synchronizing and scanning all the updated contracts in Ethereum network.
 ```
